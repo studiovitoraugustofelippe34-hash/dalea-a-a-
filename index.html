@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -42,6 +43,25 @@
       color: var(--amarelo);
       font-weight: 600;
       margin-top: 5px;
+    }
+
+    /* BOTÃO DO ESTABELECIMENTO */
+    .btn-estabelecimento {
+      display: block;
+      max-width: 850px;
+      margin: 15px auto;
+      padding: 12px;
+      background: var(--amarelo);
+      color: var(--roxo-escuro);
+      text-align: center;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 10px;
+      transition: transform 0.2s;
+    }
+
+    .btn-estabelecimento:hover {
+      transform: scale(1.02);
     }
 
     section {
@@ -266,6 +286,28 @@
       font-size: 15px;
     }
 
+    #formaRecebimento {
+      background: white;
+      padding: 20px;
+      margin: 20px auto;
+      border-radius: 12px;
+      max-width: 850px;
+    }
+
+    #formaRecebimento h3 {
+      margin-bottom: 15px;
+      color: var(--roxo-escuro);
+    }
+
+    #detalheRecebimento {
+      color: var(--roxo-escuro);
+      background: #f5eaff;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
     @media (max-width: 500px) {
       .item {
         flex-wrap: wrap;
@@ -279,20 +321,26 @@
         margin-left: 15px;
         margin-right: 15px;
       }
+
+      .btn-estabelecimento {
+        margin-left: 15px;
+        margin-right: 15px;
+      }
     }
   </style>
 </head>
 
 <body>
 
- 
-
   <header>
-    <img src="./açai.png"
-         alt="Dalea Açaí"
-         class="logo">
+    <img src="./açai.png" alt="Dalea Açaí" class="logo">
     <p>🥣 O sabor que você ama — Pedido pelo WhatsApp</p>
   </header>
+
+  <!-- DIRECIONAMENTO PARA O ESTABELECIMENTO -->
+  <a href="./estabelecimento.html" class="btn-estabelecimento">
+    🏪 Conheça nosso estabelecimento
+  </a>
 
   <div class="aviso-local">
     ⚠️ Atendemos SOMENTE em Rubinéia — SP
@@ -306,31 +354,11 @@
       ✅ Escolha 3 Adicionais GRÁTIS | Os demais são cobrados conforme abaixo
     </div>
 
-    <div class="item">
-      <span>300ml</span>
-      <span class="preco">R$ 20,00</span>
-      <button onclick="adicionarCarrinho('Açaí 300ml', 20)">Adicionar</button>
-    </div>
+    <div class="item"><span>300ml</span><span class="preco">R$ 20,00</span><button onclick="adicionarCarrinho('Açaí 300ml', 20)">Adicionar</button></div>
+    <div class="item"><span>400ml</span><span class="preco">R$ 24,00</span><button onclick="adicionarCarrinho('Açaí 400ml', 24)">Adicionar</button></div>
+    <div class="item"><span>500ml</span><span class="preco">R$ 26,00</span><button onclick="adicionarCarrinho('Açaí 500ml', 26)">Adicionar</button></div>
+    <div class="item"><span>700ml</span><span class="preco">R$ 30,00</span><button onclick="adicionarCarrinho('Açaí 700ml', 30)">Adicionar</button></div>
 
-    <div class="item">
-      <span>400ml</span>
-      <span class="preco">R$ 24,00</span>
-      <button onclick="adicionarCarrinho('Açaí 400ml', 24)">Adicionar</button>
-    </div>
-
-    <div class="item">
-      <span>500ml</span>
-      <span class="preco">R$ 26,00</span>
-      <button onclick="adicionarCarrinho('Açaí 500ml', 26)">Adicionar</button>
-    </div>
-
-    <div class="item">
-      <span>700ml</span>
-      <span class="preco">R$ 30,00</span>
-      <button onclick="adicionarCarrinho('Açaí 700ml', 30)">Adicionar</button>
-    </div>
-
-    <!-- ADICIONAIS GRÁTIS -->
     <div class="categoria">🎁 Adicionais Grátis (escolha até 3)</div>
 
     <div class="item"><span>Leite em Pó</span><span class="preco item-gratis">GRÁTIS</span><button class="btn-gratis" onclick="adicionarCarrinho('→ Leite em Pó (grátis)', 0)">+</button></div>
@@ -357,7 +385,6 @@
     <div class="item"><span>Ninho (mousse)</span><span class="preco item-gratis">GRÁTIS</span><button class="btn-gratis" onclick="adicionarCarrinho('→ Mousse de Ninho (grátis)', 0)">+</button></div>
     <div class="item"><span>Pistache (mousse)</span><span class="preco item-gratis">GRÁTIS</span><button class="btn-gratis" onclick="adicionarCarrinho('→ Mousse de Pistache (grátis)', 0)">+</button></div>
 
-    <!-- ACOMPANHAMENTOS EXTRAS -->
     <div class="categoria">💰 Acompanhamentos Extras (pagos)</div>
 
     <div class="item"><span>Morango</span><span class="preco">R$ 4,00</span><button onclick="adicionarCarrinho('→ Morango extra', 4)">+</button></div>
@@ -384,7 +411,6 @@
   <!-- AÇAÍ ECONÔMICO -->
   <section>
     <h2>🥣 AÇAÍ — Versão Econômica</h2>
-
     <div class="item"><span>300ml</span><span class="preco">R$ 14,00</span><button onclick="adicionarCarrinho('Açaí Econômico 300ml', 14)">Adicionar</button></div>
     <div class="item"><span>400ml</span><span class="preco">R$ 17,00</span><button onclick="adicionarCarrinho('Açaí Econômico 400ml', 17)">Adicionar</button></div>
     <div class="item"><span>500ml</span><span class="preco">R$ 19,00</span><button onclick="adicionarCarrinho('Açaí Econômico 500ml', 19)">Adicionar</button></div>
@@ -394,7 +420,6 @@
   <!-- AÇAÍ EXPRESSO -->
   <section>
     <h2>🍦 AÇAÍ EXPRESSO</h2>
-
     <div class="item"><span>Casquinha Simples</span><span class="preco">R$ 6,00</span><button onclick="adicionarCarrinho('Casquinha Simples', 6)">Adicionar</button></div>
     <div class="item"><span>Casquinha Trufada</span><span class="preco">R$ 8,50</span><button onclick="adicionarCarrinho('Casquinha Trufada', 8.5)">Adicionar</button></div>
     <div class="item"><span>Cascão</span><span class="preco">R$ 10,00</span><button onclick="adicionarCarrinho('Cascão', 10)">Adicionar</button></div>
@@ -405,7 +430,6 @@
   <!-- MILK SHAKE -->
   <section>
     <h2>🥤 MILK SHAKE TRADICIONAL</h2>
-
     <div class="item"><span>300ml</span><span class="preco">R$ 18,00</span><button onclick="adicionarCarrinho('Milk Shake 300ml', 18)">Adicionar</button></div>
     <div class="item"><span>400ml</span><span class="preco">R$ 20,00</span><button onclick="adicionarCarrinho('Milk Shake 400ml', 20)">Adicionar</button></div>
     <div class="item"><span>500ml</span><span class="preco">R$ 22,00</span><button onclick="adicionarCarrinho('Milk Shake 500ml', 22)">Adicionar</button></div>
@@ -415,7 +439,6 @@
   <!-- CREPES -->
   <section>
     <h2>🥞 CREPES</h2>
-
     <div class="item"><span>Crepe Salgado</span><span class="preco">R$ 10,00</span><button onclick="adicionarCarrinho('Crepe Salgado', 10)">Adicionar</button></div>
     <div class="item"><span>Crepe Doce</span><span class="preco">R$ 12,00</span><button onclick="adicionarCarrinho('Crepe Doce', 12)">Adicionar</button></div>
   </section>
@@ -423,7 +446,6 @@
   <!-- MINI SALGADOS -->
   <section>
     <h2>🍢 MINI SALGADOS NO COPO</h2>
-
     <div class="item"><span>12 Unidades</span><span class="preco">R$ 14,00</span><button onclick="adicionarCarrinho('Mini Salgados — 12 unid', 14)">Adicionar</button></div>
     <div class="item"><span>20 Unidades</span><span class="preco">R$ 22,00</span><button onclick="adicionarCarrinho('Mini Salgados — 20 unid', 22)">Adicionar</button></div>
     <div class="item"><span>32 Unidades</span><span class="preco">R$ 34,00</span><button onclick="adicionarCarrinho('Mini Salgados — 32 unid', 34)">Adicionar</button></div>
@@ -432,7 +454,6 @@
   <!-- FONDUE -->
   <section>
     <h2>🍫 FONDUE DALEA</h2>
-
     <div class="item"><span>Individual</span><span class="preco">R$ 20,00</span><button onclick="adicionarCarrinho('Fondue — Individual', 20)">Adicionar</button></div>
     <div class="item"><span>Para 2 Pessoas</span><span class="preco">R$ 26,00</span><button onclick="adicionarCarrinho('Fondue — Para 2', 26)">Adicionar</button></div>
     <div class="item"><span>Família (até 4 pessoas)</span><span class="preco">R$ 34,00</span><button onclick="adicionarCarrinho('Fondue — Família', 34)">Adicionar</button></div>
@@ -441,7 +462,6 @@
   <!-- TAÇAS ESPECIAIS -->
   <section>
     <h2>🏆 TAÇAS ESPECIAIS</h2>
-
     <div class="item"><span>Taça Oreo</span><span class="preco">R$ 32,90</span><button onclick="adicionarCarrinho('Taça Oreo', 32.9)">Adicionar</button></div>
     <div class="item"><span>Taça Kinder</span><span class="preco">R$ 35,90</span><button onclick="adicionarCarrinho('Taça Kinder', 35.9)">Adicionar</button></div>
     <div class="item"><span>Taça Banoffe</span><span class="preco">R$ 31,90</span><button onclick="adicionarCarrinho('Taça Banoffe', 31.9)">Adicionar</button></div>
@@ -451,7 +471,6 @@
   <!-- SUNDAE & BANANA SPLIT -->
   <section>
     <h2>🍨 SUNDAE & BANANA SPLIT</h2>
-
     <div class="item"><span>Sundae</span><span class="preco">R$ 24,00</span><button onclick="adicionarCarrinho('Sundae', 24)">Adicionar</button></div>
     <div class="item"><span>Banana Split</span><span class="preco">R$ 32,00</span><button onclick="adicionarCarrinho('Banana Split', 32)">Adicionar</button></div>
   </section>
@@ -459,7 +478,6 @@
   <!-- CARRINHO -->
   <div id="carrinho">
     <h2>🛒 Seu Pedido</h2>
-
     <ul id="listaCarrinho"></ul>
 
     <p><strong>Total: R$ <span id="total">0,00</span></strong></p>
@@ -500,8 +518,34 @@
     </div>
   </div>
 
+  <!-- FORMA DE RECEBIMENTO -->
+  <div id="formaRecebimento">
+    <h3>📦 Como deseja receber seu pedido?</h3>
+
+    <div class="pagamento-opcoes">
+      <label>
+        <input type="radio" name="recebimento"
+               value="Retirada no local"
+               onchange="selecionarRecebimento()">
+        🏪 Retirar no local
+      </label>
+
+      <label>
+        <input type="radio" name="recebimento"
+               value="Entrega"
+               onchange="selecionarRecebimento()">
+        🛵 Receber por entrega
+      </label>
+    </div>
+
+    <p id="detalheRecebimento" aria-live="polite">
+      Selecione como deseja receber seu pedido.
+    </p>
+  </div>
+
   <input type="text" id="endereco"
-         placeholder="Digite seu endereço completo em Rubinéia — SP">
+         placeholder="Digite seu endereço completo em Rubinéia — SP"
+         style="display:none;">
 
   <a id="whatsapp" href="#" target="_blank" rel="noopener noreferrer">
     📲 Finalizar Pedido no WhatsApp
@@ -547,6 +591,8 @@
       const detalhe = document.getElementById('detalhePagamento');
       const trocoArea = document.getElementById('trocoArea');
 
+      if (!selecionado) return;
+
       trocoArea.style.display =
         selecionado.value === 'Dinheiro' ? 'block' : 'none';
 
@@ -564,11 +610,41 @@
       atualizarLinkWhatsApp();
     }
 
+    function selecionarRecebimento() {
+      const selecionado = document.querySelector(
+        'input[name="recebimento"]:checked'
+      );
+
+      if (!selecionado) return;
+
+      const detalhe = document.getElementById('detalheRecebimento');
+      const campoEndereco = document.getElementById('endereco');
+
+      if (selecionado.value === 'Retirada no local') {
+        detalhe.textContent =
+          '🏪 Você escolheu retirar seu pedido no estabelecimento em Rubinéia — SP.';
+
+        campoEndereco.style.display = 'none';
+        campoEndereco.value = '';
+      } else {
+        detalhe.textContent =
+          '🛵 Você escolheu receber por entrega. Informe seu endereço abaixo.';
+
+        campoEndereco.style.display = 'block';
+      }
+
+      atualizarLinkWhatsApp();
+    }
+
     function atualizarLinkWhatsApp() {
-      const endereco = document.getElementById('endereco').value.trim();
+      const endereco =
+        document.getElementById('endereco').value.trim();
 
       const pagamentoSelecionado =
         document.querySelector('input[name="pagamento"]:checked');
+
+      const recebimentoSelecionado =
+        document.querySelector('input[name="recebimento"]:checked');
 
       const campoTroco = document.getElementById('troco');
       const valorTroco = campoTroco.value.trim();
@@ -579,17 +655,21 @@
           ).join('\n')
         : 'Nenhum produto adicionado ainda.';
 
-      let formaPagamento = 'Não selecionada';
+      const formaPagamento = pagamentoSelecionado
+        ? pagamentoSelecionado.value
+        : 'Não selecionada';
 
-      if (pagamentoSelecionado) {
-        formaPagamento = pagamentoSelecionado.value;
-      }
+      const formaRecebimento = recebimentoSelecionado
+        ? recebimentoSelecionado.value
+        : 'Não selecionada';
 
       let informacaoTroco = '';
 
-      if (pagamentoSelecionado &&
-          pagamentoSelecionado.value === 'Dinheiro' &&
-          valorTroco !== '') {
+      if (
+        pagamentoSelecionado &&
+        pagamentoSelecionado.value === 'Dinheiro' &&
+        valorTroco !== ''
+      ) {
         const valorNumerico = Number(valorTroco);
 
         if (Number.isFinite(valorNumerico) && valorNumerico > 0) {
@@ -598,15 +678,25 @@
         }
       }
 
-      const textoEndereco = endereco
-        ? `\n📍 Endereço: ${endereco}`
-        : '\n📍 Endereço não informado';
+      let textoEndereco = '';
+
+      if (formaRecebimento === 'Entrega') {
+        textoEndereco = endereco
+          ? `\n📍 Endereço de entrega: ${endereco}`
+          : '\n📍 Endereço de entrega não informado';
+      } else if (formaRecebimento === 'Retirada no local') {
+        textoEndereco =
+          '\n🏪 Retirada no local em Rubinéia — SP';
+      } else {
+        textoEndereco = '\n📍 Forma de recebimento não selecionada';
+      }
 
       const mensagem = encodeURIComponent(
         'Olá! Gostaria de fazer um pedido no Dalea Açaí — Rubinéia/SP 🥣\n\n' +
         itensPedido +
         `\n\n🛒 Total: R$ ${total.toFixed(2).replace('.', ',')}\n` +
         `\n💳 Forma de pagamento: ${formaPagamento}` +
+        `\n📦 Forma de recebimento: ${formaRecebimento}` +
         informacaoTroco +
         textoEndereco
       );

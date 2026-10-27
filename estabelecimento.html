@@ -1,0 +1,76 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Estabelecimento - Dalea Açaí</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100%;
+            background: #000;
+        }
+
+        .imagem-estabelecimento {
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+        }
+
+        .imagem-estabelecimento img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+
+            /* Borda da imagem */
+            border: 5px solid #4B0082;
+            border-radius: 15px;
+        }
+
+        /* Vídeo acrescentado */
+        .video-estabelecimento {
+            width: 100%;
+            padding: 10px;
+            background: #000;
+        }
+
+        .video-estabelecimento video {
+            display: block;
+            width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border: 5px solid #4B0082;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="imagem-estabelecimento">
+        <img src="./14.jpg"
+             alt="Imagem do estabelecimento Dalea Açaí">
+    </div>
+
+    <!-- Vídeo do estabelecimento -->
+    <div class="video-estabelecimento">
+        <video controls>
+            <source src="./dalea video.mp4" type="video/mp4">
+            Seu navegador não suporta a reprodução de vídeos.
+        </video>
+    </div>
+
+</body>
+</html>
+```
