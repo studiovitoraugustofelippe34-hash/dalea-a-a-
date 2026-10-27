@@ -45,7 +45,6 @@
       margin-top: 5px;
     }
 
-    /* BOTÃO DO ESTABELECIMENTO */
     .btn-estabelecimento {
       display: block;
       max-width: 850px;
@@ -140,14 +139,14 @@
       font-size: 1rem;
     }
 
-    #carrinho {
+    #carrinho,
+    #formaRecebimento,
+    #dadosCliente {
       background: white;
       padding: 20px;
-      margin: 20px 15px;
+      margin: 20px auto;
       border-radius: 12px;
       max-width: 850px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
     #carrinho h2 {
@@ -160,9 +159,34 @@
     }
 
     #listaCarrinho li {
-      padding: 6px 0;
+      padding: 10px 0;
       border-bottom: 1px solid #eee;
       color: #444;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .item-carrinho-texto {
+      flex: 1;
+      overflow-wrap: anywhere;
+    }
+
+    .acoes-carrinho {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .acoes-carrinho button {
+      min-width: 35px;
+      padding: 6px 9px;
+    }
+
+    .btn-excluir {
+      background: #fee2e2;
+      color: #991b1b;
     }
 
     .item-gratis {
@@ -177,13 +201,12 @@
     }
 
     #endereco {
-      width: calc(100% - 30px);
-      max-width: 850px;
+      width: 100%;
       padding: 12px;
       margin: 10px auto;
       display: block;
       border-radius: 8px;
-      border: none;
+      border: 1px solid #ccc;
       font-size: 15px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
@@ -257,8 +280,9 @@
       flex-shrink: 0;
     }
 
-    #detalhePagamento {
-      color: #4B0082;
+    #detalhePagamento,
+    #detalheRecebimento {
+      color: var(--roxo-escuro);
       background: #f5eaff;
       border-radius: 8px;
       padding: 12px;
@@ -269,43 +293,74 @@
     #trocoArea {
       display: none;
       margin-top: 12px;
+      background: #f5eaff;
+      padding: 14px;
+      border-radius: 8px;
     }
 
     #trocoArea label {
       display: block;
       color: #333;
       font-weight: 600;
-      margin-bottom: 6px;
+      margin: 12px 0 6px;
     }
 
-    #trocoArea input {
+    #trocoArea input,
+    .campo input,
+    .campo textarea,
+    .campo select {
       width: 100%;
       padding: 11px;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 15px;
-    }
-
-    #formaRecebimento {
       background: white;
-      padding: 20px;
-      margin: 20px auto;
-      border-radius: 12px;
-      max-width: 850px;
     }
 
-    #formaRecebimento h3 {
+    #formaRecebimento h3,
+    #dadosCliente h3 {
       margin-bottom: 15px;
       color: var(--roxo-escuro);
     }
 
-    #detalheRecebimento {
+    .campo {
+      margin: 13px 0;
+    }
+
+    .campo label {
+      display: block;
+      color: #333;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .campo small,
+    .texto-ajuda {
+      display: block;
+      color: #666;
+      font-size: 13px;
+      margin-top: 5px;
+    }
+
+    .btn-limpar {
+      display: block;
+      width: 100%;
+      background: #eee5f8;
       color: var(--roxo-escuro);
-      background: #f5eaff;
-      border-radius: 8px;
       padding: 12px;
-      margin-top: 10px;
+      margin: 12px auto;
+    }
+
+    .aviso-final {
+      color: var(--amarelo);
+      text-align: center;
+      margin: 25px 15px 0;
       font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .escondido {
+      display: none !important;
     }
 
     @media (max-width: 500px) {
@@ -326,6 +381,18 @@
         margin-left: 15px;
         margin-right: 15px;
       }
+
+      #carrinho,
+      #formaRecebimento,
+      #dadosCliente {
+        margin-left: 12px;
+        margin-right: 12px;
+        padding: 15px;
+      }
+
+      .acoes-carrinho {
+        flex-wrap: wrap;
+      }
     }
   </style>
 </head>
@@ -337,13 +404,14 @@
     <p>🥣 O sabor que você ama — Pedido pelo WhatsApp</p>
   </header>
 
-  <!-- DIRECIONAMENTO PARA O ESTABELECIMENTO -->
   <a href="./estabelecimento.html" class="btn-estabelecimento">
     🏪 Conheça nosso estabelecimento
   </a>
 
   <div class="aviso-local">
     ⚠️ Atendemos SOMENTE em Rubinéia — SP
+    <br>
+    Entregas para outras cidades não são atendidas.
   </div>
 
   <!-- MONTE O SEU AÇAÍ -->
@@ -480,7 +548,11 @@
     <h2>🛒 Seu Pedido</h2>
     <ul id="listaCarrinho"></ul>
 
-    <p><strong>Total: R$ <span id="total">0,00</span></strong></p>
+    <p><strong>Total dos produtos: R$ <span id="total">0,00</span></strong></p>
+
+    <p class="texto-ajuda">
+      O frete, se houver, será confirmado pelo estabelecimento.
+    </p>
 
     <h3 style="margin-top:18px; color:#4B0082;">
       💳 Forma de pagamento
@@ -494,9 +566,15 @@
       </label>
 
       <label>
-        <input type="radio" name="pagamento" value="Cartão"
+        <input type="radio" name="pagamento" value="Cartão de crédito"
                onchange="selecionarPagamento()">
-        💳 Cartão
+        💳 Crédito
+      </label>
+
+      <label>
+        <input type="radio" name="pagamento" value="Cartão de débito"
+               onchange="selecionarPagamento()">
+        💳 Débito
       </label>
 
       <label>
@@ -511,10 +589,62 @@
     </p>
 
     <div id="trocoArea">
-      <label for="troco">Precisa de troco? Informe o valor para o qual precisa de troco:</label>
-      <input type="number" id="troco" min="0" step="0.01"
-             placeholder="Ex.: 50,00"
-             oninput="atualizarLinkWhatsApp()">
+      <h3 style="color:#4B0082;">💵 Precisa de troco?</h3>
+
+      <div class="pagamento-opcoes">
+        <label>
+          <input type="radio" name="precisaTroco" value="Não"
+                 checked onchange="selecionarTroco()">
+          Não preciso
+        </label>
+
+        <label>
+          <input type="radio" name="precisaTroco" value="Sim"
+                 onchange="selecionarTroco()">
+          Sim, preciso
+        </label>
+      </div>
+
+      <div id="valorTrocoArea" class="escondido">
+        <label for="troco">Troco para qual valor? (R$)</label>
+        <input type="number" id="troco" min="0.01" step="0.01"
+               placeholder="Ex.: 50,00"
+               oninput="atualizarLinkWhatsApp()">
+
+        <p class="texto-ajuda">
+          Informe o valor em dinheiro que entregará ao vendedor.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DADOS DO CLIENTE -->
+  <div id="dadosCliente">
+    <h3>👤 Dados do cliente</h3>
+
+    <div class="campo">
+      <label for="nomeCliente">Nome completo *</label>
+      <input type="text" id="nomeCliente"
+             placeholder="Digite seu nome completo" required>
+    </div>
+
+    <div class="campo">
+      <label for="telefoneCliente">Seu telefone *</label>
+      <input type="tel" id="telefoneCliente"
+             placeholder="(17) 99999-9999" required>
+    </div>
+
+    <div class="campo">
+      <label for="cidadeCliente">Cidade *</label>
+      <input type="text" id="cidadeCliente"
+             value="Rubinéia" required>
+      <small>Atendimento exclusivo em Rubinéia, São Paulo.</small>
+    </div>
+
+    <div class="campo">
+      <label for="observacoes">Observações do pedido</label>
+      <textarea id="observacoes" rows="3"
+                placeholder="Ex.: retirar sem colher, ponto de referência..."></textarea>
     </div>
   </div>
 
@@ -541,176 +671,587 @@
     <p id="detalheRecebimento" aria-live="polite">
       Selecione como deseja receber seu pedido.
     </p>
-  </div>
 
-  <input type="text" id="endereco"
-         placeholder="Digite seu endereço completo em Rubinéia — SP"
-         style="display:none;">
+    <div id="enderecoArea" class="escondido">
+      <h3 style="margin-top:18px;">📍 Endereço de entrega</h3>
+
+      <div class="campo">
+        <label for="bairro">Bairro *</label>
+        <input type="text" id="bairro" placeholder="Nome do bairro">
+      </div>
+
+      <div class="campo">
+        <label for="rua">Rua ou avenida *</label>
+        <input type="text" id="rua" placeholder="Nome da rua">
+      </div>
+
+      <div class="campo">
+        <label for="numero">Número *</label>
+        <input type="text" id="numero" placeholder="Número da residência">
+      </div>
+
+      <div class="campo">
+        <label for="complemento">Complemento</label>
+        <input type="text" id="complemento"
+               placeholder="Casa, apartamento, bloco...">
+      </div>
+
+      <div class="campo">
+        <label for="referencia">Ponto de referência</label>
+        <input type="text" id="referencia"
+               placeholder="Próximo a...">
+      </div>
+    </div>
+  </div>
 
   <a id="whatsapp" href="#" target="_blank" rel="noopener noreferrer">
     📲 Finalizar Pedido no WhatsApp
   </a>
 
+  <button type="button" class="btn-limpar" onclick="limparPedido()">
+    🗑️ Limpar pedido e formulário
+  </button>
+
+  <div class="aviso-final">
+    <strong>📍 Atendimento exclusivo em Rubinéia — SP</strong>
+    <p>O pedido será enviado ao vendedor para confirmação.</p>
+    <p>Frete, prazo de entrega e disponibilidade serão confirmados pelo WhatsApp.</p>
+    <p>© 2026 — Dalea Açaí</p>
+  </div>
+
   <script>
+    // ==========================================
+    // CONFIGURAÇÕES
+    // ==========================================
+
+    const WHATSAPP_VENDEDOR = "5517996521983";
+
     let carrinho = [];
-    let total = 0;
+
+    const formatoDinheiro = valor =>
+      valor.toLocaleString("pt-BR", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+
+    const dinheiro = valor => "R$ " + formatoDinheiro(valor);
+
+    function obterTotal() {
+      return carrinho.reduce(
+        (soma, produto) => soma + produto.preco * produto.quantidade,
+        0
+      );
+    }
+
+    // ==========================================
+    // CARRINHO
+    // ==========================================
 
     function adicionarCarrinho(nome, preco) {
-      carrinho.push({ nome, preco });
-      total += preco;
+      const existente = carrinho.find(
+        produto => produto.nome === nome && produto.preco === preco
+      );
+
+      if (existente) {
+        existente.quantidade++;
+      } else {
+        carrinho.push({
+          nome,
+          preco,
+          quantidade: 1
+        });
+      }
+
+      atualizarCarrinho();
+    }
+
+    function alterarQuantidade(indice, variacao) {
+      if (!carrinho[indice]) return;
+
+      carrinho[indice].quantidade += variacao;
+
+      if (carrinho[indice].quantidade <= 0) {
+        carrinho.splice(indice, 1);
+      }
+
+      atualizarCarrinho();
+    }
+
+    function removerProduto(indice) {
+      carrinho.splice(indice, 1);
       atualizarCarrinho();
     }
 
     function atualizarCarrinho() {
-      const lista = document.getElementById('listaCarrinho');
-      lista.innerHTML = '';
+      const lista = document.getElementById("listaCarrinho");
+      lista.innerHTML = "";
 
-      carrinho.forEach(produto => {
-        const li = document.createElement('li');
+      if (carrinho.length === 0) {
+        const li = document.createElement("li");
+        li.textContent = "Seu carrinho está vazio.";
+        lista.appendChild(li);
+      }
 
-        li.textContent =
-          `${produto.nome} — R$ ${produto.preco.toFixed(2).replace('.', ',')}`;
+      carrinho.forEach((produto, indice) => {
+        const li = document.createElement("li");
+
+        const texto = document.createElement("div");
+        texto.className = "item-carrinho-texto";
+
+        texto.textContent =
+          `${produto.nome} — ${dinheiro(produto.preco)} x ${produto.quantidade} = ` +
+          dinheiro(produto.preco * produto.quantidade);
 
         if (produto.preco === 0) {
-          li.style.color = '#22c55e';
+          texto.classList.add("item-gratis");
         }
 
+        const acoes = document.createElement("div");
+        acoes.className = "acoes-carrinho";
+
+        const diminuir = document.createElement("button");
+        diminuir.type = "button";
+        diminuir.textContent = "−";
+        diminuir.setAttribute("aria-label", "Diminuir quantidade");
+        diminuir.onclick = () => alterarQuantidade(indice, -1);
+
+        const quantidade = document.createElement("span");
+        quantidade.textContent = produto.quantidade;
+
+        const aumentar = document.createElement("button");
+        aumentar.type = "button";
+        aumentar.textContent = "+";
+        aumentar.setAttribute("aria-label", "Aumentar quantidade");
+        aumentar.onclick = () => alterarQuantidade(indice, 1);
+
+        const excluir = document.createElement("button");
+        excluir.type = "button";
+        excluir.textContent = "Excluir";
+        excluir.className = "btn-excluir";
+        excluir.onclick = () => removerProduto(indice);
+
+        acoes.append(diminuir, quantidade, aumentar, excluir);
+        li.append(texto, acoes);
         lista.appendChild(li);
       });
 
-      document.getElementById('total').textContent =
-        total.toFixed(2).replace('.', ',');
+      document.getElementById("total").textContent =
+        formatoDinheiro(obterTotal());
 
       atualizarLinkWhatsApp();
     }
 
+    // ==========================================
+    // PAGAMENTO
+    // ==========================================
+
     function selecionarPagamento() {
-      const selecionado =
-        document.querySelector('input[name="pagamento"]:checked');
+      const selecionado = document.querySelector(
+        'input[name="pagamento"]:checked'
+      );
 
-      const detalhe = document.getElementById('detalhePagamento');
-      const trocoArea = document.getElementById('trocoArea');
+      const detalhe = document.getElementById("detalhePagamento");
+      const trocoArea = document.getElementById("trocoArea");
 
-      if (!selecionado) return;
+      const dinheiroSelecionado =
+        selecionado && selecionado.value === "Dinheiro";
 
-      trocoArea.style.display =
-        selecionado.value === 'Dinheiro' ? 'block' : 'none';
+      trocoArea.style.display = dinheiroSelecionado ? "block" : "none";
 
-      if (selecionado.value === 'PIX') {
+      if (!dinheiroSelecionado) {
+        document.getElementById("valorTrocoArea")
+          .classList.add("escondido");
+
+        document.getElementById("troco").value = "";
+      } else {
+        selecionarTroco();
+      }
+
+      if (!selecionado) {
+        detalhe.textContent = "Selecione uma forma de pagamento.";
+      } else if (selecionado.value === "PIX") {
         detalhe.textContent =
-          '💠 PIX selecionado. Os dados para pagamento serão combinados pelo WhatsApp.';
-      } else if (selecionado.value === 'Cartão') {
+          "💠 PIX selecionado. Os dados para pagamento serão combinados pelo WhatsApp.";
+      } else if (selecionado.value === "Cartão de crédito") {
         detalhe.textContent =
-          '💳 Cartão selecionado. A forma de pagamento será confirmada pelo WhatsApp.';
+          "💳 Cartão de crédito selecionado. Confirme a disponibilidade com o vendedor.";
+      } else if (selecionado.value === "Cartão de débito") {
+        detalhe.textContent =
+          "💳 Cartão de débito selecionado. Confirme a disponibilidade com o vendedor.";
       } else {
         detalhe.textContent =
-          '💵 Dinheiro selecionado. Se precisar de troco, informe o valor abaixo.';
+          "💵 Dinheiro selecionado. Informe se precisa de troco.";
       }
 
       atualizarLinkWhatsApp();
     }
+
+    function selecionarTroco() {
+      const precisaTroco = document.querySelector(
+        'input[name="precisaTroco"]:checked'
+      );
+
+      const area = document.getElementById("valorTrocoArea");
+
+      const mostrar = precisaTroco && precisaTroco.value === "Sim";
+
+      area.classList.toggle("escondido", !mostrar);
+
+      if (!mostrar) {
+        document.getElementById("troco").value = "";
+      }
+
+      atualizarLinkWhatsApp();
+    }
+
+    // ==========================================
+    // ENTREGA OU RETIRADA
+    // ==========================================
 
     function selecionarRecebimento() {
       const selecionado = document.querySelector(
         'input[name="recebimento"]:checked'
       );
 
-      if (!selecionado) return;
+      const detalhe = document.getElementById("detalheRecebimento");
+      const enderecoArea = document.getElementById("enderecoArea");
 
-      const detalhe = document.getElementById('detalheRecebimento');
-      const campoEndereco = document.getElementById('endereco');
+      const entrega = selecionado && selecionado.value === "Entrega";
 
-      if (selecionado.value === 'Retirada no local') {
+      enderecoArea.classList.toggle("escondido", !entrega);
+
+      ["bairro", "rua", "numero"].forEach(id => {
+        document.getElementById(id).required = Boolean(entrega);
+      });
+
+      if (!selecionado) {
         detalhe.textContent =
-          '🏪 Você escolheu retirar seu pedido no estabelecimento em Rubinéia — SP.';
-
-        campoEndereco.style.display = 'none';
-        campoEndereco.value = '';
+          "Selecione como deseja receber seu pedido.";
+      } else if (entrega) {
+        detalhe.textContent =
+          "🛵 Você escolheu receber por entrega. Informe seu endereço em Rubinéia — SP.";
       } else {
         detalhe.textContent =
-          '🛵 Você escolheu receber por entrega. Informe seu endereço abaixo.';
-
-        campoEndereco.style.display = 'block';
+          "🏪 Você escolheu retirar seu pedido no estabelecimento em Rubinéia — SP.";
       }
 
       atualizarLinkWhatsApp();
     }
 
-    function atualizarLinkWhatsApp() {
-      const endereco =
-        document.getElementById('endereco').value.trim();
+    // ==========================================
+    // VALIDAR CIDADE
+    // ==========================================
 
-      const pagamentoSelecionado =
-        document.querySelector('input[name="pagamento"]:checked');
+    function cidadePermitida() {
+      const cidade = document.getElementById("cidadeCliente")
+        .value.trim()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase();
 
-      const recebimentoSelecionado =
-        document.querySelector('input[name="recebimento"]:checked');
+      if (cidade !== "rubineia") {
+        alert(
+          "Atendemos somente em Rubinéia — SP. " +
+          "Altere a cidade para Rubinéia para continuar."
+        );
 
-      const campoTroco = document.getElementById('troco');
-      const valorTroco = campoTroco.value.trim();
+        document.getElementById("cidadeCliente").focus();
+        return false;
+      }
 
-      const itensPedido = carrinho.length
-        ? carrinho.map(p =>
-            `${p.nome} — R$ ${p.preco.toFixed(2).replace('.', ',')}`
-          ).join('\n')
-        : 'Nenhum produto adicionado ainda.';
+      return true;
+    }
 
-      const formaPagamento = pagamentoSelecionado
-        ? pagamentoSelecionado.value
-        : 'Não selecionada';
+    // ==========================================
+    // GERAR MENSAGEM DO PEDIDO
+    // ==========================================
 
-      const formaRecebimento = recebimentoSelecionado
-        ? recebimentoSelecionado.value
-        : 'Não selecionada';
+    function montarMensagemPedido() {
+      const nome = document.getElementById("nomeCliente").value.trim();
+      const telefone = document.getElementById("telefoneCliente").value.trim();
+      const cidade = document.getElementById("cidadeCliente").value.trim();
 
-      let informacaoTroco = '';
+      const pagamentoSelecionado = document.querySelector(
+        'input[name="pagamento"]:checked'
+      );
 
-      if (
-        pagamentoSelecionado &&
-        pagamentoSelecionado.value === 'Dinheiro' &&
-        valorTroco !== ''
-      ) {
-        const valorNumerico = Number(valorTroco);
+      const recebimentoSelecionado = document.querySelector(
+        'input[name="recebimento"]:checked'
+      );
 
-        if (Number.isFinite(valorNumerico) && valorNumerico > 0) {
-          informacaoTroco =
-            `\n🪙 Precisa de troco para: R$ ${valorNumerico.toFixed(2).replace('.', ',')}`;
+      const total = obterTotal();
+
+      let texto = "🥣 *NOVO PEDIDO — DALEA AÇAÍ*\n\n";
+
+      texto += "*DADOS DO CLIENTE*\n";
+      texto += `Nome: ${nome}\n`;
+      texto += `Telefone: ${telefone}\n`;
+      texto += `Cidade: ${cidade} - SP\n\n`;
+
+      texto += "*PRODUTOS DO PEDIDO*\n";
+
+      carrinho.forEach(produto => {
+        texto += `• ${produto.nome}\n`;
+        texto += `  Quantidade: ${produto.quantidade}\n`;
+        texto += `  Valor unitário: ${dinheiro(produto.preco)}\n`;
+        texto += `  Subtotal: ${dinheiro(produto.preco * produto.quantidade)}\n`;
+      });
+
+      texto += `\n*TOTAL DOS PRODUTOS: ${dinheiro(total)}*\n`;
+
+      texto += `\n*FORMA DE PAGAMENTO:* ${pagamentoSelecionado.value}\n`;
+
+      if (pagamentoSelecionado.value === "Dinheiro") {
+        const precisaTroco = document.querySelector(
+          'input[name="precisaTroco"]:checked'
+        );
+
+        if (precisaTroco && precisaTroco.value === "Sim") {
+          const valor = Number(document.getElementById("troco").value);
+
+          texto += `Precisa de troco para: ${dinheiro(valor)}\n`;
+          texto += `Troco estimado sobre os produtos: ${dinheiro(valor - total)}\n`;
+        } else {
+          texto += "Troco: Não precisa de troco\n";
         }
       }
 
-      let textoEndereco = '';
+      texto += `\n*FORMA DE RECEBIMENTO:* ${recebimentoSelecionado.value}\n`;
 
-      if (formaRecebimento === 'Entrega') {
-        textoEndereco = endereco
-          ? `\n📍 Endereço de entrega: ${endereco}`
-          : '\n📍 Endereço de entrega não informado';
-      } else if (formaRecebimento === 'Retirada no local') {
-        textoEndereco =
-          '\n🏪 Retirada no local em Rubinéia — SP';
+      if (recebimentoSelecionado.value === "Entrega") {
+        texto += "\n*ENDEREÇO DE ENTREGA*\n";
+        texto += `Cidade: ${cidade} - SP\n`;
+        texto += `Bairro: ${document.getElementById("bairro").value.trim()}\n`;
+        texto += `Rua: ${document.getElementById("rua").value.trim()}\n`;
+        texto += `Número: ${document.getElementById("numero").value.trim()}\n`;
+
+        const complemento =
+          document.getElementById("complemento").value.trim();
+
+        const referencia =
+          document.getElementById("referencia").value.trim();
+
+        if (complemento) {
+          texto += `Complemento: ${complemento}\n`;
+        }
+
+        if (referencia) {
+          texto += `Ponto de referência: ${referencia}\n`;
+        }
       } else {
-        textoEndereco = '\n📍 Forma de recebimento não selecionada';
+        texto += "Local: Retirada no estabelecimento\n";
       }
 
-      const mensagem = encodeURIComponent(
-        'Olá! Gostaria de fazer um pedido no Dalea Açaí — Rubinéia/SP 🥣\n\n' +
-        itensPedido +
-        `\n\n🛒 Total: R$ ${total.toFixed(2).replace('.', ',')}\n` +
-        `\n💳 Forma de pagamento: ${formaPagamento}` +
-        `\n📦 Forma de recebimento: ${formaRecebimento}` +
-        informacaoTroco +
-        textoEndereco
-      );
+      const observacoes =
+        document.getElementById("observacoes").value.trim();
 
-      document.getElementById('whatsapp').href =
-        `https://wa.me/5517996521983?text=${mensagem}`;
+      if (observacoes) {
+        texto += `\n*OBSERVAÇÕES:* ${observacoes}\n`;
+      }
+
+      texto += "\n📍 *ATENDIMENTO EXCLUSIVO EM RUBINÉIA — SP*";
+      texto += "\nFrete e prazo de entrega a confirmar pelo estabelecimento.";
+
+      return texto;
     }
 
-    document.getElementById('endereco').addEventListener(
-      'input',
-      atualizarLinkWhatsApp
-    );
+    // ==========================================
+    // ATUALIZAR LINK DO WHATSAPP
+    // ==========================================
 
-    atualizarLinkWhatsApp();
+    function atualizarLinkWhatsApp() {
+      const pagamentoSelecionado = document.querySelector(
+        'input[name="pagamento"]:checked'
+      );
+
+      const recebimentoSelecionado = document.querySelector(
+        'input[name="recebimento"]:checked'
+      );
+
+      const total = obterTotal();
+      const troco = Number(document.getElementById("troco").value);
+
+      let informacaoTroco = "";
+
+      if (
+        pagamentoSelecionado &&
+        pagamentoSelecionado.value === "Dinheiro"
+      ) {
+        const precisaTroco = document.querySelector(
+          'input[name="precisaTroco"]:checked'
+        );
+
+        if (precisaTroco && precisaTroco.value === "Sim") {
+          informacaoTroco =
+            `\n🪙 Precisa de troco para: ${
+              Number.isFinite(troco) && troco > 0
+                ? dinheiro(troco)
+                : "valor não informado"
+            }`;
+        } else {
+          informacaoTroco = "\n🪙 Não precisa de troco";
+        }
+      }
+
+      const itensPedido = carrinho.length
+        ? carrinho.map(p =>
+            `${p.nome} — ${dinheiro(p.preco)} x ${p.quantidade}`
+          ).join("\n")
+        : "Nenhum produto adicionado ainda.";
+
+      const endereco = document.getElementById("enderecoArea")
+        .classList.contains("escondido")
+        ? "Retirada no local"
+        : [
+            document.getElementById("rua").value,
+            document.getElementById("numero").value,
+            document.getElementById("bairro").value,
+            document.getElementById("cidadeCliente").value
+          ].filter(Boolean).join(", ");
+
+      const mensagem = encodeURIComponent(
+        "Olá! Gostaria de fazer um pedido no Dalea Açaí — Rubinéia/SP 🥣\n\n" +
+        itensPedido +
+        `\n\n🛒 Total dos produtos: ${dinheiro(total)}\n` +
+        `\n💳 Pagamento: ${pagamentoSelecionado ? pagamentoSelecionado.value : "Não selecionado"}` +
+        informacaoTroco +
+        `\n📦 Recebimento: ${recebimentoSelecionado ? recebimentoSelecionado.value : "Não selecionado"}` +
+        `\n📍 Endereço: ${endereco}`
+      );
+
+      document.getElementById("whatsapp").href =
+        `https://wa.me/${WHATSAPP_VENDEDOR}?text=${mensagem}`;
+    }
+
+    // ==========================================
+    // VALIDAR E ABRIR WHATSAPP
+    // ==========================================
+
+    document.getElementById("whatsapp").addEventListener("click", function(event) {
+      event.preventDefault();
+
+      if (carrinho.length === 0) {
+        alert("Adicione pelo menos um produto ao seu pedido.");
+        return;
+      }
+
+      const nome = document.getElementById("nomeCliente").value.trim();
+      const telefone = document.getElementById("telefoneCliente").value.trim();
+
+      if (!nome || !telefone) {
+        alert("Preencha seu nome completo e telefone.");
+        document.getElementById(!nome ? "nomeCliente" : "telefoneCliente").focus();
+        return;
+      }
+
+      if (!cidadePermitida()) return;
+
+      const pagamento = document.querySelector(
+        'input[name="pagamento"]:checked'
+      );
+
+      if (!pagamento) {
+        alert("Selecione a forma de pagamento.");
+        document.getElementById("detalhePagamento").scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+        return;
+      }
+
+      const recebimento = document.querySelector(
+        'input[name="recebimento"]:checked'
+      );
+
+      if (!recebimento) {
+        alert("Selecione entrega ou retirada no local.");
+        return;
+      }
+
+      if (recebimento.value === "Entrega") {
+        const bairro = document.getElementById("bairro").value.trim();
+        const rua = document.getElementById("rua").value.trim();
+        const numero = document.getElementById("numero").value.trim();
+
+        if (!bairro || !rua || !numero) {
+          alert("Preencha o bairro, a rua e o número do endereço de entrega.");
+          return;
+        }
+      }
+
+      if (pagamento.value === "Dinheiro") {
+        const precisaTroco = document.querySelector(
+          'input[name="precisaTroco"]:checked'
+        );
+
+        if (precisaTroco && precisaTroco.value === "Sim") {
+          const valor = Number(document.getElementById("troco").value);
+
+          if (!Number.isFinite(valor) || valor <= 0) {
+            alert("Informe o valor para o qual precisa de troco.");
+            document.getElementById("troco").focus();
+            return;
+          }
+
+          if (valor < obterTotal()) {
+            alert("O valor para o troco deve ser igual ou maior que o total dos produtos.");
+            document.getElementById("troco").focus();
+            return;
+          }
+        }
+      }
+
+      const texto = montarMensagemPedido();
+
+      const url = `https://wa.me/${WHATSAPP_VENDEDOR}?text=${encodeURIComponent(texto)}`;
+
+      window.open(url, "_blank", "noopener,noreferrer");
+    });
+
+    // ==========================================
+    // LIMPAR PEDIDO
+    // ==========================================
+
+    function limparPedido() {
+      if (!confirm("Deseja limpar o carrinho e todos os dados preenchidos?")) {
+        return;
+      }
+
+      carrinho = [];
+      atualizarCarrinho();
+
+      document.getElementById("nomeCliente").value = "";
+      document.getElementById("telefoneCliente").value = "";
+      document.getElementById("cidadeCliente").value = "Rubinéia";
+      document.getElementById("bairro").value = "";
+      document.getElementById("rua").value = "";
+      document.getElementById("numero").value = "";
+      document.getElementById("complemento").value = "";
+      document.getElementById("referencia").value = "";
+      document.getElementById("observacoes").value = "";
+      document.getElementById("troco").value = "";
+
+      document.querySelectorAll(
+        'input[name="pagamento"], input[name="recebimento"]'
+      ).forEach(input => input.checked = false);
+
+      document.querySelector('input[name="precisaTroco"][value="Não"]').checked = true;
+
+      selecionarPagamento();
+      selecionarRecebimento();
+      selecionarTroco();
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // ==========================================
+    // INICIALIZAR
+    // ==========================================
+
+    atualizarCarrinho();
+    selecionarPagamento();
+    selecionarRecebimento();
+    selecionarTroco();
   </script>
 
 </body>
