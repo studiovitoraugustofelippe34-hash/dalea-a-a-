@@ -1,0 +1,706 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dalea Açaí - Cadastro de Clientes</title>
+
+<style>
+:root {
+    --principal: #7026a8;
+    --secundaria: #9333ea;
+    --fundo: #f7f5fa;
+    --texto: #222;
+    --verde: #16834a;
+    --vermelho: #dc2626;
+    --borda: #e5dced;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: var(--fundo);
+    color: var(--texto);
+}
+
+header {
+    background: var(--principal);
+    color: white;
+    padding: 25px 5%;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 8px;
+}
+
+main {
+    width: 95%;
+    max-width: 1100px;
+    margin: 25px auto;
+}
+
+.painel {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    margin-bottom: 22px;
+    box-shadow: 0 3px 12px #0000000d;
+}
+
+h2 {
+    color: var(--principal);
+    margin-bottom: 18px;
+}
+
+.formulario {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.campo.completo {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    font-size: 15px;
+    background: white;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 85px;
+}
+
+button {
+    border: none;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.salvar {
+    background: var(--principal);
+    color: white;
+}
+
+.limpar {
+    background: #eee7f4;
+    color: var(--principal);
+}
+
+.excluir {
+    background: var(--vermelho);
+    color: white;
+    padding: 9px 12px;
+}
+
+.acoes {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+}
+
+.resumo {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.numero {
+    background: white;
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+    border: 1px solid var(--borda);
+}
+
+.numero strong {
+    display: block;
+    font-size: 27px;
+    color: var(--principal);
+    margin-top: 8px;
+}
+
+.busca {
+    margin-bottom: 18px;
+}
+
+.lista {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.cliente {
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    padding: 17px;
+    overflow-wrap: anywhere;
+}
+
+.cliente h3 {
+    color: var(--principal);
+    margin-bottom: 12px;
+}
+
+.cliente p {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.cliente .acoes {
+    margin-top: 12px;
+}
+
+.vazio {
+    color: #777;
+    text-align: center;
+    padding: 25px 5px;
+    grid-column: 1 / -1;
+}
+
+.status {
+    margin-top: 14px;
+    color: var(--verde);
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #666;
+}
+
+@media (max-width: 650px) {
+    .formulario,
+    .lista {
+        grid-template-columns: 1fr;
+    }
+
+    .resumo {
+        grid-template-columns: 1fr;
+    }
+
+    .campo.completo {
+        grid-column: auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Dalea Açaí</h1>
+    <p>Cadastro e armazenamento de clientes</p>
+</header>
+
+<main>
+
+    <section class="resumo">
+        <div class="numero">
+            Clientes cadastrados
+            <strong id="totalClientes">0</strong>
+        </div>
+
+        <div class="numero">
+            Pedidos registrados
+            <strong id="totalPedidos">0</strong>
+        </div>
+
+        <div class="numero">
+            Armazenamento
+            <strong id="estadoBanco">Ativo</strong>
+        </div>
+    </section>
+
+    <section class="painel">
+        <h2 id="tituloFormulario">Cadastrar cliente</h2>
+
+        <form id="formCliente">
+            <input type="hidden" id="clienteId">
+
+            <div class="formulario">
+
+                <div class="campo">
+                    <label for="nome">Nome do cliente *</label>
+                    <input id="nome" required maxlength="120"
+                           placeholder="Nome completo">
+                </div>
+
+                <div class="campo">
+                    <label for="telefone">Telefone *</label>
+                    <input id="telefone" type="tel" required
+                           maxlength="25" placeholder="(18) 99999-9999">
+                </div>
+
+                <div class="campo completo">
+                    <label for="endereco">Endereço de entrega</label>
+                    <input id="endereco" maxlength="250"
+                           placeholder="Rua, número, bairro e complemento">
+                </div>
+
+                <div class="campo">
+                    <label for="pedido">Pedido</label>
+                    <textarea id="pedido" maxlength="2000"
+                              placeholder="Ex.: açaí 500 ml, banana, leite em pó..."></textarea>
+                </div>
+
+                <div class="campo">
+                    <label for="pagamento">Forma de pagamento</label>
+                    <select id="pagamento">
+                        <option value="">Selecione</option>
+                        <option value="Pix">Pix</option>
+                        <option value="Dinheiro">Dinheiro</option>
+                        <option value="Cartão de crédito">Cartão de crédito</option>
+                        <option value="Cartão de débito">Cartão de débito</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="valor">Valor do pedido (R$)</label>
+                    <input id="valor" type="number" min="0"
+                           max="1000000" step="0.01" placeholder="0,00">
+                </div>
+
+                <div class="campo">
+                    <label for="recebimento">Recebimento</label>
+                    <select id="recebimento">
+                        <option value="Entrega">Entrega</option>
+                        <option value="Retirada no local">Retirada no local</option>
+                    </select>
+                </div>
+
+                <div class="campo completo">
+                    <label for="observacoes">Observações</label>
+                    <textarea id="observacoes" maxlength="1000"
+                              placeholder="Informações adicionais"></textarea>
+                </div>
+
+            </div>
+
+            <div class="acoes">
+                <button type="submit" class="salvar">
+                    Salvar cliente
+                </button>
+
+                <button type="button" class="limpar"
+                        id="botaoLimpar">
+                    Limpar formulário
+                </button>
+            </div>
+
+            <p id="mensagem" class="status" role="status"></p>
+        </form>
+    </section>
+
+    <section class="painel">
+        <h2>Clientes armazenados</h2>
+
+        <input class="busca" id="pesquisa"
+               placeholder="Pesquisar por nome ou telefone..."
+               aria-label="Pesquisar clientes">
+
+        <div id="listaClientes" class="lista"></div>
+
+        <div class="acoes">
+            <button type="button" class="limpar" id="exportar">
+                Exportar backup JSON
+            </button>
+
+            <button type="button" class="limpar" id="exportarCSV">
+                Exportar planilha CSV
+            </button>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    Dalea Açaí - Sistema local de clientes
+</footer>
+
+<script>
+"use strict";
+
+const CHAVE = "dalea_acai_clientes_v1";
+
+const form = document.getElementById("formCliente");
+const lista = document.getElementById("listaClientes");
+const pesquisa = document.getElementById("pesquisa");
+const mensagem = document.getElementById("mensagem");
+
+let clientes = carregarClientes();
+
+function carregarClientes() {
+    try {
+        const dados = localStorage.getItem(CHAVE);
+
+        if (!dados) return [];
+
+        const resultado = JSON.parse(dados);
+
+        if (!Array.isArray(resultado)) return [];
+
+        return resultado.filter(item =>
+            item &&
+            typeof item.id === "string" &&
+            typeof item.nome === "string"
+        );
+    } catch (erro) {
+        alert("Não foi possível ler os dados armazenados.");
+        return [];
+    }
+}
+
+function armazenarClientes() {
+    try {
+        localStorage.setItem(CHAVE, JSON.stringify(clientes));
+        return true;
+    } catch (erro) {
+        alert(
+            "Não foi possível salvar os dados. " +
+            "O armazenamento pode estar cheio ou bloqueado."
+        );
+        return false;
+    }
+}
+
+function valor(id) {
+    return document.getElementById(id).value.trim();
+}
+
+function limparFormulario() {
+    form.reset();
+    document.getElementById("clienteId").value = "";
+    document.getElementById("tituloFormulario").textContent =
+        "Cadastrar cliente";
+
+    mensagem.textContent = "";
+}
+
+form.addEventListener("submit", function(evento) {
+    evento.preventDefault();
+
+    const idAtual = valor("clienteId");
+    const nome = valor("nome");
+    const telefone = valor("telefone");
+    const valorTexto = valor("valor");
+    const preco = valorTexto === "" ? 0 : Number(valorTexto);
+
+    if (!nome || !telefone) {
+        mensagem.textContent = "Preencha o nome e o telefone.";
+        return;
+    }
+
+    if (!Number.isFinite(preco) || preco < 0 || preco > 1000000) {
+        mensagem.textContent = "Informe um valor válido.";
+        return;
+    }
+
+    const existente = clientes.find(item => item.id === idAtual);
+
+    const cliente = {
+        id: idAtual || (
+            typeof crypto !== "undefined" &&
+            typeof crypto.randomUUID === "function"
+                ? crypto.randomUUID()
+                : Date.now().toString() + Math.random().toString(16).slice(2)
+        ),
+        nome: nome,
+        telefone: telefone,
+        endereco: valor("endereco"),
+        pedido: valor("pedido"),
+        pagamento: valor("pagamento"),
+        valor: preco,
+        recebimento: valor("recebimento"),
+        observacoes: valor("observacoes"),
+        criadoEm: existente
+            ? existente.criadoEm
+            : new Date().toISOString(),
+        atualizadoEm: new Date().toISOString()
+    };
+
+    const anterior = clientes;
+
+    if (existente) {
+        clientes = clientes.map(item =>
+            item.id === idAtual ? cliente : item
+        );
+    } else {
+        clientes.unshift(cliente);
+    }
+
+    if (!armazenarClientes()) {
+        clientes = anterior;
+        return;
+    }
+
+    mensagem.textContent = existente
+        ? "Cliente atualizado e salvo!"
+        : "Cliente cadastrado e salvo!";
+
+    limparFormulario();
+    renderizarClientes();
+});
+
+function criarElemento(tag, texto, classe) {
+    const elemento = document.createElement(tag);
+
+    if (texto !== undefined) {
+        elemento.textContent = texto;
+    }
+
+    if (classe) {
+        elemento.className = classe;
+    }
+
+    return elemento;
+}
+
+function adicionarCampo(cartao, titulo, conteudo) {
+    const paragrafo = document.createElement("p");
+    const forte = document.createElement("strong");
+
+    forte.textContent = titulo + ": ";
+    paragrafo.appendChild(forte);
+    paragrafo.appendChild(
+        document.createTextNode(
+            conteudo === undefined || conteudo === null ||
+            conteudo === ""
+                ? "Não informado"
+                : String(conteudo)
+        )
+    );
+
+    cartao.appendChild(paragrafo);
+}
+
+function renderizarClientes() {
+    const termo = pesquisa.value.trim().toLocaleLowerCase("pt-BR");
+
+    const filtrados = clientes.filter(cliente =>
+        cliente.nome.toLocaleLowerCase("pt-BR").includes(termo) ||
+        cliente.telefone.toLocaleLowerCase("pt-BR").includes(termo)
+    );
+
+    document.getElementById("totalClientes").textContent =
+        clientes.length;
+
+    document.getElementById("totalPedidos").textContent =
+        clientes.filter(cliente => cliente.pedido).length;
+
+    lista.replaceChildren();
+
+    if (filtrados.length === 0) {
+        lista.appendChild(
+            criarElemento(
+                "p",
+                clientes.length === 0
+                    ? "Nenhum cliente cadastrado ainda."
+                    : "Nenhum cliente encontrado.",
+                "vazio"
+            )
+        );
+        return;
+    }
+
+    filtrados.forEach(cliente => {
+        const cartao = criarElemento("article", undefined, "cliente");
+
+        cartao.appendChild(criarElemento("h3", cliente.nome));
+
+        adicionarCampo(cartao, "Telefone", cliente.telefone);
+        adicionarCampo(cartao, "Endereço", cliente.endereco);
+        adicionarCampo(cartao, "Pedido", cliente.pedido);
+        adicionarCampo(cartao, "Pagamento", cliente.pagamento);
+        adicionarCampo(
+            cartao,
+            "Valor",
+            Number(cliente.valor || 0).toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            })
+        );
+        adicionarCampo(cartao, "Recebimento", cliente.recebimento);
+        adicionarCampo(cartao, "Observações", cliente.observacoes);
+
+        const data = new Date(cliente.criadoEm);
+
+        adicionarCampo(
+            cartao,
+            "Cadastro",
+            Number.isNaN(data.getTime())
+                ? "Data indisponível"
+                : data.toLocaleString("pt-BR")
+        );
+
+        const acoes = criarElemento("div", undefined, "acoes");
+
+        const editar = criarElemento("button", "Editar", "limpar");
+        editar.type = "button";
+
+        editar.addEventListener("click", () => editarCliente(cliente.id));
+
+        const excluir = criarElemento("button", "Excluir", "excluir");
+        excluir.type = "button";
+
+        excluir.addEventListener("click", () => excluirCliente(cliente.id));
+
+        acoes.append(editar, excluir);
+        cartao.appendChild(acoes);
+        lista.appendChild(cartao);
+    });
+}
+
+function editarCliente(id) {
+    const cliente = clientes.find(item => item.id === id);
+
+    if (!cliente) return;
+
+    document.getElementById("clienteId").value = cliente.id;
+    document.getElementById("nome").value = cliente.nome;
+    document.getElementById("telefone").value = cliente.telefone;
+    document.getElementById("endereco").value = cliente.endereco || "";
+    document.getElementById("pedido").value = cliente.pedido || "";
+    document.getElementById("pagamento").value = cliente.pagamento || "";
+    document.getElementById("valor").value = cliente.valor || "";
+    document.getElementById("recebimento").value =
+        cliente.recebimento || "Entrega";
+    document.getElementById("observacoes").value =
+        cliente.observacoes || "";
+
+    document.getElementById("tituloFormulario").textContent =
+        "Editar cliente";
+
+    mensagem.textContent = "Edite os campos e clique em salvar.";
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function excluirCliente(id) {
+    const cliente = clientes.find(item => item.id === id);
+
+    if (!cliente) return;
+
+    if (!confirm("Deseja excluir o cadastro de " + cliente.nome + "?")) {
+        return;
+    }
+
+    const anterior = clientes;
+    clientes = clientes.filter(item => item.id !== id);
+
+    if (!armazenarClientes()) {
+        clientes = anterior;
+        return;
+    }
+
+    if (valor("clienteId") === id) {
+        limparFormulario();
+    }
+
+    renderizarClientes();
+}
+
+document.getElementById("botaoLimpar").addEventListener(
+    "click",
+    limparFormulario
+);
+
+pesquisa.addEventListener("input", renderizarClientes);
+
+document.getElementById("exportar").addEventListener("click", () => {
+    baixarArquivo(
+        JSON.stringify(clientes, null, 2),
+        "clientes-dalea-acai.json",
+        "application/json;charset=utf-8"
+    );
+});
+
+document.getElementById("exportarCSV").addEventListener("click", () => {
+    const colunas = [
+        ["nome", "Nome"],
+        ["telefone", "Telefone"],
+        ["endereco", "Endereço"],
+        ["pedido", "Pedido"],
+        ["pagamento", "Pagamento"],
+        ["valor", "Valor"],
+        ["recebimento", "Recebimento"],
+        ["observacoes", "Observações"],
+        ["criadoEm", "Data de cadastro"]
+    ];
+
+    function escaparCSV(valor) {
+        let texto = String(valor ?? "");
+
+        // Evita que planilhas executem fórmulas contidas nos dados.
+        if (/^[\s]*[=+\-@]/.test(texto)) {
+            texto = "'" + texto;
+        }
+
+        return '"' + texto.replace(/"/g, '""') + '"';
+    }
+
+    const linhas = [
+        colunas.map(coluna => escaparCSV(coluna[1])).join(";"),
+        ...clientes.map(cliente =>
+            colunas.map(coluna =>
+                escaparCSV(cliente[coluna[0]])
+            ).join(";")
+        )
+    ];
+
+    baixarArquivo(
+        "\uFEFF" + linhas.join("\r\n"),
+        "clientes-dalea-acai.csv",
+        "text/csv;charset=utf-8"
+    );
+});
+
+function baixarArquivo(conteudo, nome, tipo) {
+    const arquivo = new Blob([conteudo], { type: tipo });
+    const url = URL.createObjectURL(arquivo);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = nome;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+renderizarClientes();
+</script>
+
+</body>
+</html>

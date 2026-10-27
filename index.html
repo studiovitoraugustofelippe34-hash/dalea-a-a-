@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -345,6 +345,7 @@
     .btn-limpar {
       display: block;
       width: 100%;
+      max-width: 850px;
       background: #eee5f8;
       color: var(--roxo-escuro);
       padding: 12px;
@@ -357,6 +358,24 @@
       margin: 25px 15px 0;
       font-size: 14px;
       line-height: 1.7;
+    }
+
+    .link-cliente {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 10px 16px;
+      border: 2px solid var(--amarelo);
+      border-radius: 8px;
+      color: var(--amarelo);
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .link-cliente:hover {
+      background: var(--amarelo);
+      color: var(--roxo-escuro);
+      transform: scale(1.03);
     }
 
     .escondido {
@@ -393,6 +412,10 @@
       .acoes-carrinho {
         flex-wrap: wrap;
       }
+
+      .btn-limpar {
+        width: calc(100% - 24px);
+      }
     }
   </style>
 </head>
@@ -414,7 +437,6 @@
     Entregas para outras cidades não são atendidas.
   </div>
 
-  <!-- MONTE O SEU AÇAÍ -->
   <section>
     <h2>🥣 MONTE O SEU AÇAÍ</h2>
 
@@ -476,7 +498,6 @@
     <div class="item"><span>Wafer Branco / Ao Leite / Rafaello (mousse)</span><span class="preco">R$ 6,00</span><button onclick="adicionarCarrinho('→ Mousse Wafer Branco/Rafaello', 6)">+</button></div>
   </section>
 
-  <!-- AÇAÍ ECONÔMICO -->
   <section>
     <h2>🥣 AÇAÍ — Versão Econômica</h2>
     <div class="item"><span>300ml</span><span class="preco">R$ 14,00</span><button onclick="adicionarCarrinho('Açaí Econômico 300ml', 14)">Adicionar</button></div>
@@ -485,7 +506,6 @@
     <div class="item"><span>700ml</span><span class="preco">R$ 22,00</span><button onclick="adicionarCarrinho('Açaí Econômico 700ml', 22)">Adicionar</button></div>
   </section>
 
-  <!-- AÇAÍ EXPRESSO -->
   <section>
     <h2>🍦 AÇAÍ EXPRESSO</h2>
     <div class="item"><span>Casquinha Simples</span><span class="preco">R$ 6,00</span><button onclick="adicionarCarrinho('Casquinha Simples', 6)">Adicionar</button></div>
@@ -495,7 +515,6 @@
     <div class="item"><span>Cestinha</span><span class="preco">R$ 15,00</span><button onclick="adicionarCarrinho('Cestinha', 15)">Adicionar</button></div>
   </section>
 
-  <!-- MILK SHAKE -->
   <section>
     <h2>🥤 MILK SHAKE TRADICIONAL</h2>
     <div class="item"><span>300ml</span><span class="preco">R$ 18,00</span><button onclick="adicionarCarrinho('Milk Shake 300ml', 18)">Adicionar</button></div>
@@ -504,14 +523,12 @@
     <div class="item"><span>700ml</span><span class="preco">R$ 26,00</span><button onclick="adicionarCarrinho('Milk Shake 700ml', 26)">Adicionar</button></div>
   </section>
 
-  <!-- CREPES -->
   <section>
     <h2>🥞 CREPES</h2>
     <div class="item"><span>Crepe Salgado</span><span class="preco">R$ 10,00</span><button onclick="adicionarCarrinho('Crepe Salgado', 10)">Adicionar</button></div>
     <div class="item"><span>Crepe Doce</span><span class="preco">R$ 12,00</span><button onclick="adicionarCarrinho('Crepe Doce', 12)">Adicionar</button></div>
   </section>
 
-  <!-- MINI SALGADOS -->
   <section>
     <h2>🍢 MINI SALGADOS NO COPO</h2>
     <div class="item"><span>12 Unidades</span><span class="preco">R$ 14,00</span><button onclick="adicionarCarrinho('Mini Salgados — 12 unid', 14)">Adicionar</button></div>
@@ -519,7 +536,6 @@
     <div class="item"><span>32 Unidades</span><span class="preco">R$ 34,00</span><button onclick="adicionarCarrinho('Mini Salgados — 32 unid', 34)">Adicionar</button></div>
   </section>
 
-  <!-- FONDUE -->
   <section>
     <h2>🍫 FONDUE DALEA</h2>
     <div class="item"><span>Individual</span><span class="preco">R$ 20,00</span><button onclick="adicionarCarrinho('Fondue — Individual', 20)">Adicionar</button></div>
@@ -527,7 +543,6 @@
     <div class="item"><span>Família (até 4 pessoas)</span><span class="preco">R$ 34,00</span><button onclick="adicionarCarrinho('Fondue — Família', 34)">Adicionar</button></div>
   </section>
 
-  <!-- TAÇAS ESPECIAIS -->
   <section>
     <h2>🏆 TAÇAS ESPECIAIS</h2>
     <div class="item"><span>Taça Oreo</span><span class="preco">R$ 32,90</span><button onclick="adicionarCarrinho('Taça Oreo', 32.9)">Adicionar</button></div>
@@ -536,14 +551,12 @@
     <div class="item"><span>Taça Nutelíssima</span><span class="preco">R$ 43,90</span><button onclick="adicionarCarrinho('Taça Nutelíssima', 43.9)">Adicionar</button></div>
   </section>
 
-  <!-- SUNDAE & BANANA SPLIT -->
   <section>
     <h2>🍨 SUNDAE & BANANA SPLIT</h2>
     <div class="item"><span>Sundae</span><span class="preco">R$ 24,00</span><button onclick="adicionarCarrinho('Sundae', 24)">Adicionar</button></div>
     <div class="item"><span>Banana Split</span><span class="preco">R$ 32,00</span><button onclick="adicionarCarrinho('Banana Split', 32)">Adicionar</button></div>
   </section>
 
-  <!-- CARRINHO -->
   <div id="carrinho">
     <h2>🛒 Seu Pedido</h2>
     <ul id="listaCarrinho"></ul>
@@ -559,118 +572,64 @@
     </h3>
 
     <div class="pagamento-opcoes">
-      <label>
-        <input type="radio" name="pagamento" value="PIX"
-               onchange="selecionarPagamento()">
-        💠 PIX
-      </label>
-
-      <label>
-        <input type="radio" name="pagamento" value="Cartão de crédito"
-               onchange="selecionarPagamento()">
-        💳 Crédito
-      </label>
-
-      <label>
-        <input type="radio" name="pagamento" value="Cartão de débito"
-               onchange="selecionarPagamento()">
-        💳 Débito
-      </label>
-
-      <label>
-        <input type="radio" name="pagamento" value="Dinheiro"
-               onchange="selecionarPagamento()">
-        💵 Dinheiro
-      </label>
+      <label><input type="radio" name="pagamento" value="PIX" onchange="selecionarPagamento()"> 💠 PIX</label>
+      <label><input type="radio" name="pagamento" value="Cartão de crédito" onchange="selecionarPagamento()"> 💳 Crédito</label>
+      <label><input type="radio" name="pagamento" value="Cartão de débito" onchange="selecionarPagamento()"> 💳 Débito</label>
+      <label><input type="radio" name="pagamento" value="Dinheiro" onchange="selecionarPagamento()"> 💵 Dinheiro</label>
     </div>
 
-    <p id="detalhePagamento" aria-live="polite">
-      Selecione uma forma de pagamento.
-    </p>
+    <p id="detalhePagamento" aria-live="polite">Selecione uma forma de pagamento.</p>
 
     <div id="trocoArea">
       <h3 style="color:#4B0082;">💵 Precisa de troco?</h3>
 
       <div class="pagamento-opcoes">
-        <label>
-          <input type="radio" name="precisaTroco" value="Não"
-                 checked onchange="selecionarTroco()">
-          Não preciso
-        </label>
-
-        <label>
-          <input type="radio" name="precisaTroco" value="Sim"
-                 onchange="selecionarTroco()">
-          Sim, preciso
-        </label>
+        <label><input type="radio" name="precisaTroco" value="Não" checked onchange="selecionarTroco()"> Não preciso</label>
+        <label><input type="radio" name="precisaTroco" value="Sim" onchange="selecionarTroco()"> Sim, preciso</label>
       </div>
 
       <div id="valorTrocoArea" class="escondido">
         <label for="troco">Troco para qual valor? (R$)</label>
-        <input type="number" id="troco" min="0.01" step="0.01"
-               placeholder="Ex.: 50,00"
-               oninput="atualizarLinkWhatsApp()">
-
-        <p class="texto-ajuda">
-          Informe o valor em dinheiro que entregará ao vendedor.
-        </p>
+        <input type="number" id="troco" min="0.01" step="0.01" placeholder="Ex.: 50,00" oninput="atualizarLinkWhatsApp()">
+        <p class="texto-ajuda">Informe o valor em dinheiro que entregará ao vendedor.</p>
       </div>
     </div>
   </div>
 
-  <!-- DADOS DO CLIENTE -->
   <div id="dadosCliente">
     <h3>👤 Dados do cliente</h3>
 
     <div class="campo">
       <label for="nomeCliente">Nome completo *</label>
-      <input type="text" id="nomeCliente"
-             placeholder="Digite seu nome completo" required>
+      <input type="text" id="nomeCliente" placeholder="Digite seu nome completo" required>
     </div>
 
     <div class="campo">
       <label for="telefoneCliente">Seu telefone *</label>
-      <input type="tel" id="telefoneCliente"
-             placeholder="(17) 99999-9999" required>
+      <input type="tel" id="telefoneCliente" placeholder="(17) 99999-9999" required>
     </div>
 
     <div class="campo">
       <label for="cidadeCliente">Cidade *</label>
-      <input type="text" id="cidadeCliente"
-             value="Rubinéia" required>
+      <input type="text" id="cidadeCliente" value="Rubinéia" required>
       <small>Atendimento exclusivo em Rubinéia, São Paulo.</small>
     </div>
 
     <div class="campo">
       <label for="observacoes">Observações do pedido</label>
-      <textarea id="observacoes" rows="3"
-                placeholder="Ex.: retirar sem colher, ponto de referência..."></textarea>
+      <textarea id="observacoes" rows="3" placeholder="Ex.: retirar sem colher, ponto de referência..."></textarea>
     </div>
   </div>
 
-  <!-- FORMA DE RECEBIMENTO -->
   <div id="formaRecebimento">
     <h3>📦 Como deseja receber seu pedido?</h3>
 
     <div class="pagamento-opcoes">
-      <label>
-        <input type="radio" name="recebimento"
-               value="Retirada no local"
-               onchange="selecionarRecebimento()">
-        🏪 Retirar no local
-      </label>
-
-      <label>
-        <input type="radio" name="recebimento"
-               value="Entrega"
-               onchange="selecionarRecebimento()">
-        🛵 Receber por entrega
-      </label>
+      <label><input type="radio" name="recebimento" value="Retirada no local" onchange="selecionarRecebimento()"> 🏪 Retirar no local</label>
+      <label><input type="radio" name="recebimento" value="Entrega" onchange="selecionarRecebimento()"> 🛵 Receber por entrega</label>
     </div>
 
-    <p id="detalheRecebimento" aria-live="polite">
-      Selecione como deseja receber seu pedido.
-    </p>
+    <p id="detalheRecebimento" aria-live="polite">Selecione como deseja receber seu pedido.</p>
 
     <div id="enderecoArea" class="escondido">
       <h3 style="margin-top:18px;">📍 Endereço de entrega</h3>
@@ -692,14 +651,12 @@
 
       <div class="campo">
         <label for="complemento">Complemento</label>
-        <input type="text" id="complemento"
-               placeholder="Casa, apartamento, bloco...">
+        <input type="text" id="complemento" placeholder="Casa, apartamento, bloco...">
       </div>
 
       <div class="campo">
         <label for="referencia">Ponto de referência</label>
-        <input type="text" id="referencia"
-               placeholder="Próximo a...">
+        <input type="text" id="referencia" placeholder="Próximo a...">
       </div>
     </div>
   </div>
@@ -717,14 +674,18 @@
     <p>O pedido será enviado ao vendedor para confirmação.</p>
     <p>Frete, prazo de entrega e disponibilidade serão confirmados pelo WhatsApp.</p>
     <p>© 2026 — Dalea Açaí</p>
+
+    <!-- OPÇÃO NO RODAPÉ PARA ABRIR cliente.html -->
+    <p>
+      <a href="./cliente.html" class="link-cliente">
+        📋 Consultar pedidos salvos
+      </a>
+    </p>
   </div>
 
   <script>
-    // ==========================================
-    // CONFIGURAÇÕES
-    // ==========================================
-
     const WHATSAPP_VENDEDOR = "5517996521983";
+    const CHAVE_PEDIDOS = "dalea_pedidos";
 
     let carrinho = [];
 
@@ -743,9 +704,7 @@
       );
     }
 
-    // ==========================================
     // CARRINHO
-    // ==========================================
 
     function adicionarCarrinho(nome, preco) {
       const existente = carrinho.find(
@@ -755,11 +714,7 @@
       if (existente) {
         existente.quantidade++;
       } else {
-        carrinho.push({
-          nome,
-          preco,
-          quantidade: 1
-        });
+        carrinho.push({ nome, preco, quantidade: 1 });
       }
 
       atualizarCarrinho();
@@ -794,7 +749,6 @@
 
       carrinho.forEach((produto, indice) => {
         const li = document.createElement("li");
-
         const texto = document.createElement("div");
         texto.className = "item-carrinho-texto";
 
@@ -802,9 +756,7 @@
           `${produto.nome} — ${dinheiro(produto.preco)} x ${produto.quantidade} = ` +
           dinheiro(produto.preco * produto.quantidade);
 
-        if (produto.preco === 0) {
-          texto.classList.add("item-gratis");
-        }
+        if (produto.preco === 0) texto.classList.add("item-gratis");
 
         const acoes = document.createElement("div");
         acoes.className = "acoes-carrinho";
@@ -841,27 +793,18 @@
       atualizarLinkWhatsApp();
     }
 
-    // ==========================================
     // PAGAMENTO
-    // ==========================================
 
     function selecionarPagamento() {
-      const selecionado = document.querySelector(
-        'input[name="pagamento"]:checked'
-      );
-
+      const selecionado = document.querySelector('input[name="pagamento"]:checked');
       const detalhe = document.getElementById("detalhePagamento");
       const trocoArea = document.getElementById("trocoArea");
-
-      const dinheiroSelecionado =
-        selecionado && selecionado.value === "Dinheiro";
+      const dinheiroSelecionado = selecionado && selecionado.value === "Dinheiro";
 
       trocoArea.style.display = dinheiroSelecionado ? "block" : "none";
 
       if (!dinheiroSelecionado) {
-        document.getElementById("valorTrocoArea")
-          .classList.add("escondido");
-
+        document.getElementById("valorTrocoArea").classList.add("escondido");
         document.getElementById("troco").value = "";
       } else {
         selecionarTroco();
@@ -870,52 +813,36 @@
       if (!selecionado) {
         detalhe.textContent = "Selecione uma forma de pagamento.";
       } else if (selecionado.value === "PIX") {
-        detalhe.textContent =
-          "💠 PIX selecionado. Os dados para pagamento serão combinados pelo WhatsApp.";
+        detalhe.textContent = "💠 PIX selecionado. Os dados para pagamento serão combinados pelo WhatsApp.";
       } else if (selecionado.value === "Cartão de crédito") {
-        detalhe.textContent =
-          "💳 Cartão de crédito selecionado. Confirme a disponibilidade com o vendedor.";
+        detalhe.textContent = "💳 Cartão de crédito selecionado. Confirme a disponibilidade com o vendedor.";
       } else if (selecionado.value === "Cartão de débito") {
-        detalhe.textContent =
-          "💳 Cartão de débito selecionado. Confirme a disponibilidade com o vendedor.";
+        detalhe.textContent = "💳 Cartão de débito selecionado. Confirme a disponibilidade com o vendedor.";
       } else {
-        detalhe.textContent =
-          "💵 Dinheiro selecionado. Informe se precisa de troco.";
+        detalhe.textContent = "💵 Dinheiro selecionado. Informe se precisa de troco.";
       }
 
       atualizarLinkWhatsApp();
     }
 
     function selecionarTroco() {
-      const precisaTroco = document.querySelector(
-        'input[name="precisaTroco"]:checked'
-      );
-
+      const precisaTroco = document.querySelector('input[name="precisaTroco"]:checked');
       const area = document.getElementById("valorTrocoArea");
-
       const mostrar = precisaTroco && precisaTroco.value === "Sim";
 
       area.classList.toggle("escondido", !mostrar);
 
-      if (!mostrar) {
-        document.getElementById("troco").value = "";
-      }
+      if (!mostrar) document.getElementById("troco").value = "";
 
       atualizarLinkWhatsApp();
     }
 
-    // ==========================================
     // ENTREGA OU RETIRADA
-    // ==========================================
 
     function selecionarRecebimento() {
-      const selecionado = document.querySelector(
-        'input[name="recebimento"]:checked'
-      );
-
+      const selecionado = document.querySelector('input[name="recebimento"]:checked');
       const detalhe = document.getElementById("detalheRecebimento");
       const enderecoArea = document.getElementById("enderecoArea");
-
       const entrega = selecionado && selecionado.value === "Entrega";
 
       enderecoArea.classList.toggle("escondido", !entrega);
@@ -925,36 +852,26 @@
       });
 
       if (!selecionado) {
-        detalhe.textContent =
-          "Selecione como deseja receber seu pedido.";
+        detalhe.textContent = "Selecione como deseja receber seu pedido.";
       } else if (entrega) {
-        detalhe.textContent =
-          "🛵 Você escolheu receber por entrega. Informe seu endereço em Rubinéia — SP.";
+        detalhe.textContent = "🛵 Você escolheu receber por entrega. Informe seu endereço em Rubinéia — SP.";
       } else {
-        detalhe.textContent =
-          "🏪 Você escolheu retirar seu pedido no estabelecimento em Rubinéia — SP.";
+        detalhe.textContent = "🏪 Você escolheu retirar seu pedido no estabelecimento em Rubinéia — SP.";
       }
 
       atualizarLinkWhatsApp();
     }
 
-    // ==========================================
     // VALIDAR CIDADE
-    // ==========================================
 
     function cidadePermitida() {
-      const cidade = document.getElementById("cidadeCliente")
-        .value.trim()
+      const cidade = document.getElementById("cidadeCliente").value.trim()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
         .toLowerCase();
 
       if (cidade !== "rubineia") {
-        alert(
-          "Atendemos somente em Rubinéia — SP. " +
-          "Altere a cidade para Rubinéia para continuar."
-        );
-
+        alert("Atendemos somente em Rubinéia — SP. Altere a cidade para Rubinéia para continuar.");
         document.getElementById("cidadeCliente").focus();
         return false;
       }
@@ -962,23 +879,15 @@
       return true;
     }
 
-    // ==========================================
-    // GERAR MENSAGEM DO PEDIDO
-    // ==========================================
+    // MENSAGEM COMPLETA PARA O WHATSAPP
 
     function montarMensagemPedido() {
       const nome = document.getElementById("nomeCliente").value.trim();
       const telefone = document.getElementById("telefoneCliente").value.trim();
       const cidade = document.getElementById("cidadeCliente").value.trim();
 
-      const pagamentoSelecionado = document.querySelector(
-        'input[name="pagamento"]:checked'
-      );
-
-      const recebimentoSelecionado = document.querySelector(
-        'input[name="recebimento"]:checked'
-      );
-
+      const pagamentoSelecionado = document.querySelector('input[name="pagamento"]:checked');
+      const recebimentoSelecionado = document.querySelector('input[name="recebimento"]:checked');
       const total = obterTotal();
 
       let texto = "🥣 *NOVO PEDIDO — DALEA AÇAÍ*\n\n";
@@ -998,17 +907,13 @@
       });
 
       texto += `\n*TOTAL DOS PRODUTOS: ${dinheiro(total)}*\n`;
-
       texto += `\n*FORMA DE PAGAMENTO:* ${pagamentoSelecionado.value}\n`;
 
       if (pagamentoSelecionado.value === "Dinheiro") {
-        const precisaTroco = document.querySelector(
-          'input[name="precisaTroco"]:checked'
-        );
+        const precisaTroco = document.querySelector('input[name="precisaTroco"]:checked');
 
         if (precisaTroco && precisaTroco.value === "Sim") {
           const valor = Number(document.getElementById("troco").value);
-
           texto += `Precisa de troco para: ${dinheiro(valor)}\n`;
           texto += `Troco estimado sobre os produtos: ${dinheiro(valor - total)}\n`;
         } else {
@@ -1025,29 +930,18 @@
         texto += `Rua: ${document.getElementById("rua").value.trim()}\n`;
         texto += `Número: ${document.getElementById("numero").value.trim()}\n`;
 
-        const complemento =
-          document.getElementById("complemento").value.trim();
+        const complemento = document.getElementById("complemento").value.trim();
+        const referencia = document.getElementById("referencia").value.trim();
 
-        const referencia =
-          document.getElementById("referencia").value.trim();
-
-        if (complemento) {
-          texto += `Complemento: ${complemento}\n`;
-        }
-
-        if (referencia) {
-          texto += `Ponto de referência: ${referencia}\n`;
-        }
+        if (complemento) texto += `Complemento: ${complemento}\n`;
+        if (referencia) texto += `Ponto de referência: ${referencia}\n`;
       } else {
         texto += "Local: Retirada no estabelecimento\n";
       }
 
-      const observacoes =
-        document.getElementById("observacoes").value.trim();
+      const observacoes = document.getElementById("observacoes").value.trim();
 
-      if (observacoes) {
-        texto += `\n*OBSERVAÇÕES:* ${observacoes}\n`;
-      }
+      if (observacoes) texto += `\n*OBSERVAÇÕES:* ${observacoes}\n`;
 
       texto += "\n📍 *ATENDIMENTO EXCLUSIVO EM RUBINÉIA — SP*";
       texto += "\nFrete e prazo de entrega a confirmar pelo estabelecimento.";
@@ -1055,52 +949,95 @@
       return texto;
     }
 
-    // ==========================================
+    // SALVAR TODOS OS DADOS DO PEDIDO PARA cliente.html
+
+    function salvarPedidoCliente() {
+      const pagamentoSelecionado = document.querySelector('input[name="pagamento"]:checked');
+      const recebimentoSelecionado = document.querySelector('input[name="recebimento"]:checked');
+      const precisaTroco = document.querySelector('input[name="precisaTroco"]:checked');
+
+      const pedido = {
+        id: Date.now(),
+        data: new Date().toLocaleString("pt-BR"),
+
+        cliente: {
+          nome: document.getElementById("nomeCliente").value.trim(),
+          telefone: document.getElementById("telefoneCliente").value.trim(),
+          cidade: document.getElementById("cidadeCliente").value.trim()
+        },
+
+        produtos: carrinho.map(produto => ({
+          nome: produto.nome,
+          preco: produto.preco,
+          quantidade: produto.quantidade,
+          subtotal: produto.preco * produto.quantidade
+        })),
+
+        total: obterTotal(),
+        pagamento: pagamentoSelecionado ? pagamentoSelecionado.value : "",
+
+        precisaTroco:
+          pagamentoSelecionado &&
+          pagamentoSelecionado.value === "Dinheiro" &&
+          precisaTroco
+            ? precisaTroco.value
+            : "",
+
+        valorTroco: document.getElementById("troco").value,
+
+        recebimento: recebimentoSelecionado ? recebimentoSelecionado.value : "",
+
+        endereco: {
+          bairro: document.getElementById("bairro").value.trim(),
+          rua: document.getElementById("rua").value.trim(),
+          numero: document.getElementById("numero").value.trim(),
+          complemento: document.getElementById("complemento").value.trim(),
+          referencia: document.getElementById("referencia").value.trim()
+        },
+
+        observacoes: document.getElementById("observacoes").value.trim(),
+        status: "Aguardando confirmação"
+      };
+
+      const pedidosSalvos = JSON.parse(localStorage.getItem(CHAVE_PEDIDOS) || "[]");
+
+      if (!Array.isArray(pedidosSalvos)) {
+        throw new Error("Os dados salvos dos pedidos estão inválidos.");
+      }
+
+      pedidosSalvos.push(pedido);
+      localStorage.setItem(CHAVE_PEDIDOS, JSON.stringify(pedidosSalvos));
+
+      return pedido;
+    }
+
     // ATUALIZAR LINK DO WHATSAPP
-    // ==========================================
 
     function atualizarLinkWhatsApp() {
-      const pagamentoSelecionado = document.querySelector(
-        'input[name="pagamento"]:checked'
-      );
-
-      const recebimentoSelecionado = document.querySelector(
-        'input[name="recebimento"]:checked'
-      );
-
+      const pagamentoSelecionado = document.querySelector('input[name="pagamento"]:checked');
+      const recebimentoSelecionado = document.querySelector('input[name="recebimento"]:checked');
       const total = obterTotal();
       const troco = Number(document.getElementById("troco").value);
 
       let informacaoTroco = "";
 
-      if (
-        pagamentoSelecionado &&
-        pagamentoSelecionado.value === "Dinheiro"
-      ) {
-        const precisaTroco = document.querySelector(
-          'input[name="precisaTroco"]:checked'
-        );
+      if (pagamentoSelecionado && pagamentoSelecionado.value === "Dinheiro") {
+        const precisaTroco = document.querySelector('input[name="precisaTroco"]:checked');
 
         if (precisaTroco && precisaTroco.value === "Sim") {
-          informacaoTroco =
-            `\n🪙 Precisa de troco para: ${
-              Number.isFinite(troco) && troco > 0
-                ? dinheiro(troco)
-                : "valor não informado"
-            }`;
+          informacaoTroco = `\n🪙 Precisa de troco para: ${
+            Number.isFinite(troco) && troco > 0 ? dinheiro(troco) : "valor não informado"
+          }`;
         } else {
           informacaoTroco = "\n🪙 Não precisa de troco";
         }
       }
 
       const itensPedido = carrinho.length
-        ? carrinho.map(p =>
-            `${p.nome} — ${dinheiro(p.preco)} x ${p.quantidade}`
-          ).join("\n")
+        ? carrinho.map(p => `${p.nome} — ${dinheiro(p.preco)} x ${p.quantidade}`).join("\n")
         : "Nenhum produto adicionado ainda.";
 
-      const endereco = document.getElementById("enderecoArea")
-        .classList.contains("escondido")
+      const endereco = document.getElementById("enderecoArea").classList.contains("escondido")
         ? "Retirada no local"
         : [
             document.getElementById("rua").value,
@@ -1123,9 +1060,7 @@
         `https://wa.me/${WHATSAPP_VENDEDOR}?text=${mensagem}`;
     }
 
-    // ==========================================
-    // VALIDAR E ABRIR WHATSAPP
-    // ==========================================
+    // VALIDAR E FINALIZAR PEDIDO
 
     document.getElementById("whatsapp").addEventListener("click", function(event) {
       event.preventDefault();
@@ -1146,9 +1081,7 @@
 
       if (!cidadePermitida()) return;
 
-      const pagamento = document.querySelector(
-        'input[name="pagamento"]:checked'
-      );
+      const pagamento = document.querySelector('input[name="pagamento"]:checked');
 
       if (!pagamento) {
         alert("Selecione a forma de pagamento.");
@@ -1159,9 +1092,7 @@
         return;
       }
 
-      const recebimento = document.querySelector(
-        'input[name="recebimento"]:checked'
-      );
+      const recebimento = document.querySelector('input[name="recebimento"]:checked');
 
       if (!recebimento) {
         alert("Selecione entrega ou retirada no local.");
@@ -1180,9 +1111,7 @@
       }
 
       if (pagamento.value === "Dinheiro") {
-        const precisaTroco = document.querySelector(
-          'input[name="precisaTroco"]:checked'
-        );
+        const precisaTroco = document.querySelector('input[name="precisaTroco"]:checked');
 
         if (precisaTroco && precisaTroco.value === "Sim") {
           const valor = Number(document.getElementById("troco").value);
@@ -1203,14 +1132,21 @@
 
       const texto = montarMensagemPedido();
 
+      // O pedido é salvo antes de abrir o WhatsApp.
+      try {
+        salvarPedidoCliente();
+      } catch (erro) {
+        console.error("Erro ao salvar pedido:", erro);
+        alert("Não foi possível salvar o pedido neste navegador. Verifique o armazenamento do navegador e tente novamente.");
+        return;
+      }
+
       const url = `https://wa.me/${WHATSAPP_VENDEDOR}?text=${encodeURIComponent(texto)}`;
 
       window.open(url, "_blank", "noopener,noreferrer");
     });
 
-    // ==========================================
     // LIMPAR PEDIDO
-    // ==========================================
 
     function limparPedido() {
       if (!confirm("Deseja limpar o carrinho e todos os dados preenchidos?")) {
@@ -1231,9 +1167,8 @@
       document.getElementById("observacoes").value = "";
       document.getElementById("troco").value = "";
 
-      document.querySelectorAll(
-        'input[name="pagamento"], input[name="recebimento"]'
-      ).forEach(input => input.checked = false);
+      document.querySelectorAll('input[name="pagamento"], input[name="recebimento"]')
+        .forEach(input => input.checked = false);
 
       document.querySelector('input[name="precisaTroco"][value="Não"]').checked = true;
 
@@ -1244,9 +1179,7 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    // ==========================================
     // INICIALIZAR
-    // ==========================================
 
     atualizarCarrinho();
     selecionarPagamento();
@@ -1256,3 +1189,4 @@
 
 </body>
 </html>
+```
